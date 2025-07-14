@@ -1,0 +1,1 @@
+To run test please use: python run_test.py --image "img_test\scene_01.jpg" --conf 0.1

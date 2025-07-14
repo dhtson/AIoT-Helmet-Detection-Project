@@ -1,0 +1,7 @@
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+Road safety is a significant global concern, with traffic accidents being a leading cause of injury and death. The use of helmets by motorcyclists drastically reduces the risk of severe head injuries. This project addresses the challenge of automatically monitoring helmet usage by developing a lightweight, real-time helmet and motorbike detection system. The system is designed for deployment on low-cost edge computing devices, specifically the Raspberry Pi 3B+.
+
+This report details the end-to-end process of building this system, from data acquisition to final deployment. We utilize two public datasets from Roboflow, which are merged and preprocessed for training. The core of the detection system is the YOLOv8n model, chosen for its excellent balance of speed and accuracy, making it ideal for edge devices. The model was trained in a cloud environment (RunPod) and subsequently converted to the TensorFlow Lite (TFLite) format, with FP16 quantization to optimize performance.
+
+The final system successfully identifies motorbikes, helmets, and instances of riders without helmets from a static image. The implementation demonstrates the feasibility of using modern deep learning techniques on affordable hardware for practical public safety applications. This report covers the methodology, implementation details, performance results, and potential avenues for future work.

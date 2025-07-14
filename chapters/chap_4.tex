@@ -1,0 +1,87 @@
+\chapter{Implementation}
+This chapter details the key scripts developed for the project.
+
+\section{Data Preparation Script (\texttt{download.py})}
+This script automates the downloading and merging of datasets from Roboflow.
+\begin{lstlisting}[language=Python, caption={Key snippet from download.py.}]
+import os
+import yaml
+from roboflow import Roboflow
+
+# Configuration for datasets and API key
+ROBOFLOW_API_KEY = "YOUR_ROBOFLOW_API_KEY"
+DATASET_URLS = {
+    "motobike": "cdio-zmfmj/motobike-detection",
+    "helmet_license": "cdio-zmfmj/helmet-lincense-plate-detection-gevlq"
+}
+# ... (rest of the script) ...
+
+# Merging datasets
+final_class_list = sorted(list(all_classes), key=lambda x: class_map[x])
+
+final_yaml_content = {
+    'path': os.path.abspath(COMBINED_DIR),
+    'train': 'images/train',
+    'val': 'images/valid',
+    'test': 'images/test',
+    'names': {i: name for i, name in enumerate(final_class_list)}
+}
+
+final_yaml_path = os.path.join(COMBINED_DIR, "data.yaml")
+with open(final_yaml_path, 'w') as f:
+    yaml.dump(final_yaml_content, f, sort_keys=False, indent=4)
+
+# ... (rest of the script) ...
+\end{lstlisting}
+
+\section{Model Training Script (\texttt{train.py})}
+This script handles the training of the YOLOv8n model and the final export to TFLite.
+\begin{lstlisting}[language=Python, caption={Key snippet from train.py.}]
+from ultralytics import YOLO
+
+# Configuration for training
+DATA_YAML_PATH = "./datasets/combined_dataset/data.yaml"
+EPOCHS = 100
+PATIENCE = 5
+IMG_SIZE = 320
+
+# Load a pre-trained model
+model = YOLO('yolov8n.pt')
+
+# Train the model
+results = model.train(
+    data=DATA_YAML_PATH,
+    epochs=EPOCHS,
+    patience=PATIENCE,
+    imgsz=IMG_SIZE,
+)
+
+# Export the best model to TFLite format
+best_model = YOLO(results.save_dir / 'weights' / 'best.pt')
+best_model.export(format='tflite')
+\end{lstlisting}
+
+\section{Inference Script (\texttt{detect.py})}
+This is the final script deployed on the Raspberry Pi to perform detection on an image.
+\begin{lstlisting}[language=Python, caption={Key snippet from the Raspberry Pi inference script.}]
+import cv2
+import tflite_runtime.interpreter as tflite
+import numpy as np
+
+# Load the TFLite model and allocate tensors
+interpreter = tflite.Interpreter(model_path="best_float16.tflite")
+interpreter.allocate_tensors()
+
+# Get input and output tensors.
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+
+# ... (Image preprocessing) ...
+
+# Run inference
+interpreter.set_tensor(input_details[0]['index'], input_data)
+interpreter.invoke()
+output_data = interpreter.get_tensor(output_details[0]['index'])
+
+# ... (Post-processing and drawing boxes) ...
+\end{lstlisting}

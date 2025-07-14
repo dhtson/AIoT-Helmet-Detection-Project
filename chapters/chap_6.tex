@@ -1,0 +1,15 @@
+\chapter{Conclusion and Future Work}
+\section{Conclusion}
+This project successfully developed and deployed an end-to-end system for detecting helmet violations on a Raspberry Pi 3B+. By combining public datasets, training a lightweight YOLOv8n model, and optimizing it for edge devices using TFLite, we created a proof-of-concept that is both cost-effective and functional. The system accurately identifies motorbikes and classifies riders as wearing or not wearing a helmet, achieving an inference speed suitable for near real-time applications. This work validates the approach of using modern, efficient deep learning models to address real-world safety challenges on affordable hardware.
+
+\section{Future Work}
+While the current system is a successful proof-of-concept, there are several avenues for future enhancement:
+\begin{itemize}
+    \item \textbf{Real-Time Video Processing:} Adapt the inference script to process a live video feed from a USB camera instead of a static image. This would involve creating a loop to continuously capture frames and run detection.
+    \item \textbf{Hardware Upgrade:} Port the system to a more powerful single-board computer, such as a Raspberry Pi 4/5 or a Jetson Nano, to achieve higher frame rates and the ability to process higher-resolution video.
+    \item \textbf{Data Enhancement:} Augment the training dataset with more challenging images (e.g., night, rain, blur) to improve the model's robustness.
+    \item \textbf{System Integration:} Integrate the detection module with an alerting system. For example, when a "no-helmet" violation is detected, the system could log the timestamp, save the image frame, and send a notification.
+    \item \textbf{License Plate Recognition:} Extend the system by adding an Optical Character Recognition (OCR) model to read the characters from the detected license plate bounding boxes.
+\end{itemize}
+
+These enhancements would not only improve the system's performance but also broaden its applicability in various traffic monitoring scenarios. The integration of real-time processing and additional features like license plate recognition would make the system a more comprehensive solution for traffic safety monitoring, potentially contributing to reduced accidents and improved compliance with safety regulations.

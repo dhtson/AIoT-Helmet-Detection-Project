@@ -1,0 +1,22 @@
+\chapter{Literature Review and Background}
+\section{Object Detection}
+Object detection is a core computer vision task that involves identifying and locating objects within an image or video. Unlike image classification, which assigns a single label to an entire image, object detection provides the class label and a bounding box (coordinates) for each instance of an object. Modern object detection is dominated by deep learning approaches, primarily Convolutional Neural Networks (CNNs).
+
+\section{YOLO: You Only Look Once}
+The YOLO (You Only Look Once) family of models revolutionized real-time object detection. Introduced by Joseph Redmon et al., YOLO frames object detection as a single regression problem, straight from image pixels to bounding box coordinates and class probabilities. This unified architecture is extremely fast, making it ideal for real-time applications.
+
+\subsection{YOLOv8}
+YOLOv8, developed by Ultralytics, is the latest iteration in the YOLO series. It builds upon the successes of its predecessors, offering a new backbone network, a new anchor-free detection head, and a new loss function. YOLOv8 is designed to be fast, accurate, and easy to use, providing a framework for training models for object detection, segmentation, and classification tasks. The \texttt{YOLOv8n} (nano) variant is the smallest and fastest model in the series, specifically designed for edge and mobile deployments where computational resources are limited.
+
+\section{Model Optimization for Edge Devices}
+Deploying deep learning models on edge devices like the Raspberry Pi presents significant challenges due to limited processing power, memory (RAM), and energy consumption. Model optimization is a critical step to make this feasible.
+
+\subsection{TensorFlow Lite (TFLite)}
+TensorFlow Lite is a set of tools by Google designed to help developers run TensorFlow models on mobile, embedded, and IoT devices. It converts a standard TensorFlow model into a special, highly optimized \texttt{.tflite} format. This format is smaller in size and enables lower-latency inference.
+
+\subsection{Quantization (FP16)}
+Quantization is a technique to reduce the computational and memory costs of running inference by representing the model's weights and activations with lower-precision data types, such as 16-bit floating-point numbers (FP16) instead of the standard 32-bit (FP32).
+\begin{itemize}
+    \item \textbf{FP32 (Single Precision):} The standard format for training. It is highly accurate but memory-intensive.
+    \item \textbf{FP16 (Half Precision):} Uses 16 bits instead of 32. This cuts the model size roughly in half and reduces memory usage, with a minimal and often negligible impact on accuracy. This makes it the ideal choice for devices like the Raspberry Pi.
+\end{itemize}

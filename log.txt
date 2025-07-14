@@ -1,0 +1,733 @@
+root@6f997361882f:/workspace# touch download.py
+root@6f997361882f:/workspace# python download.py 
+--- Step 1: Downloading Datasets ---
+loading Roboflow workspace...
+loading Roboflow project...
+Downloading version 10 of 'motobike'...
+Downloading Dataset Version Zip in Motobike-Detection-10 to yolov8:: 100%|██████████████████████████████████████████████████████████████████| 177310/177310 [00:14<00:00, 12061.44it/s]
+
+Extracting Dataset Version Zip to Motobike-Detection-10 in yolov8:: 100%|█████████████████████████████████████████████████████████████████████████| 6742/6742 [00:28<00:00, 236.33it/s]
+WARNING ⚠️ user config directory '/root/.config/Ultralytics' is not writeable, defaulting to '/tmp' or CWD.Alternatively you can define a YOLO_CONFIG_DIR environment variable for this path.
+'motobike' dataset downloaded to: /workspace/Motobike-Detection-10
+loading Roboflow workspace...
+loading Roboflow project...
+Downloading version 10 of 'helmet_license'...
+Downloading Dataset Version Zip in helmet-lincense-plate-detection-10 to yolov8:: 100%|█████████████████████████████████████████████████████| 322898/322898 [00:26<00:00, 12229.02it/s]
+
+Extracting Dataset Version Zip to helmet-lincense-plate-detection-10 in yolov8:: 100%|██████████████████████████████████████████████████████████| 17626/17626 [01:06<00:00, 263.24it/s]
+'helmet_license' dataset downloaded to: /workspace/helmet-lincense-plate-detection-10
+
+--- Step 2: Merging Datasets ---
+Processing and merging 'motobike'...
+Processing and merging 'helmet_license'...
+
+--- Step 3: Creating Final YAML Configuration ---
+
+--- Dataset Preparation Complete ---
+Unified dataset is ready for training in: ./datasets/combined_dataset
+Training configuration file created at: ./datasets/combined_dataset/data.yaml
+Unified Classes: ['motobike', 'LP', 'helmet', 'no helmet']
+root@6f997361882f:/workspace# python train.py 
+WARNING ⚠️ user config directory '/root/.config/Ultralytics' is not writeable, defaulting to '/tmp' or CWD.Alternatively you can define a YOLO_CONFIG_DIR environment variable for this path.
+--- Step 1: Starting YOLOv8n Training ---
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8n.pt to 'yolov8n.pt'...
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6.25M/6.25M [00:00<00:00, 19.9MB/s]
+Ultralytics 8.3.162 🚀 Python-3.10.12 torch-2.1.0+cu118 CUDA:0 (NVIDIA RTX 4000 Ada Generation, 20147MiB)
+engine/trainer: agnostic_nms=False, amp=True, augment=False, auto_augment=randaugment, batch=16, bgr=0.0, box=7.5, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.5, conf=None, copy_paste=0.0, copy_paste_mode=flip, cos_lr=False, cutmix=0.0, data=./datasets/combined_dataset/data.yaml, degrees=0.0, deterministic=True, device=None, dfl=1.5, dnn=False, dropout=0.0, dynamic=False, embed=None, epochs=100, erasing=0.4, exist_ok=False, fliplr=0.5, flipud=0.0, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, imgsz=320, int8=False, iou=0.7, keras=False, kobj=1.0, line_width=None, lr0=0.01, lrf=0.01, mask_ratio=4, max_det=300, mixup=0.0, mode=train, model=yolov8n.pt, momentum=0.937, mosaic=1.0, multi_scale=False, name=helmet_detection, nbs=64, nms=False, opset=None, optimize=False, optimizer=auto, overlap_mask=True, patience=5, perspective=0.0, plots=True, pose=12.0, pretrained=True, profile=False, project=None, rect=False, resume=False, retina_masks=False, save=True, save_conf=False, save_crop=False, save_dir=runs/detect/helmet_detection, save_frames=False, save_json=False, save_period=-1, save_txt=False, scale=0.5, seed=0, shear=0.0, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.1, val=True, verbose=True, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=3.0, warmup_momentum=0.8, weight_decay=0.0005, workers=8, workspace=None
+Downloading https://ultralytics.com/assets/Arial.ttf to '/tmp/Ultralytics/Arial.ttf'...
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 755k/755k [00:00<00:00, 4.75MB/s]
+Overriding model.yaml nc=80 with nc=4
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       464  ultralytics.nn.modules.conv.Conv             [3, 16, 3, 2]                 
+  1                  -1  1      4672  ultralytics.nn.modules.conv.Conv             [16, 32, 3, 2]                
+  2                  -1  1      7360  ultralytics.nn.modules.block.C2f             [32, 32, 1, True]             
+  3                  -1  1     18560  ultralytics.nn.modules.conv.Conv             [32, 64, 3, 2]                
+  4                  -1  2     49664  ultralytics.nn.modules.block.C2f             [64, 64, 2, True]             
+  5                  -1  1     73984  ultralytics.nn.modules.conv.Conv             [64, 128, 3, 2]               
+  6                  -1  2    197632  ultralytics.nn.modules.block.C2f             [128, 128, 2, True]           
+  7                  -1  1    295424  ultralytics.nn.modules.conv.Conv             [128, 256, 3, 2]              
+  8                  -1  1    460288  ultralytics.nn.modules.block.C2f             [256, 256, 1, True]           
+  9                  -1  1    164608  ultralytics.nn.modules.block.SPPF            [256, 256, 5]                 
+ 10                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 11             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 12                  -1  1    148224  ultralytics.nn.modules.block.C2f             [384, 128, 1]                 
+ 13                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 14             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 15                  -1  1     37248  ultralytics.nn.modules.block.C2f             [192, 64, 1]                  
+ 16                  -1  1     36992  ultralytics.nn.modules.conv.Conv             [64, 64, 3, 2]                
+ 17            [-1, 12]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 18                  -1  1    123648  ultralytics.nn.modules.block.C2f             [192, 128, 1]                 
+ 19                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]              
+ 20             [-1, 9]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 21                  -1  1    493056  ultralytics.nn.modules.block.C2f             [384, 256, 1]                 
+ 22        [15, 18, 21]  1    752092  ultralytics.nn.modules.head.Detect           [4, [64, 128, 256]]           
+Model summary: 129 layers, 3,011,628 parameters, 3,011,612 gradients, 8.2 GFLOPs
+
+Transferred 319/355 items from pretrained weights
+Freezing layer 'model.22.dfl.conv.weight'
+AMP: running Automatic Mixed Precision (AMP) checks...
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt to 'yolo11n.pt'...
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5.35M/5.35M [00:00<00:00, 21.0MB/s]
+AMP: checks passed ✅
+train: Fast image access ✅ (ping: 0.4±0.1 ms, read: 13.4±3.4 MB/s, size: 41.5 KB)
+train: Scanning /workspace/datasets/combined_dataset/labels/train... 11148 images, 9 backgrounds, 0 corrupt: 100%|██████████| 11148/11148 [00:13<00:00, 831.70it/s]
+train: New cache created: /workspace/datasets/combined_dataset/labels/train.cache
+WARNING ⚠️ Box and segment counts should be equal, but got len(segments) = 3, len(boxes) = 15425. To resolve this only boxes will be used and all segments will be removed. To avoid this please supply either a detect or segment dataset, not a detect-segment mixed dataset.
+val: Fast image access ✅ (ping: 0.2±0.0 ms, read: 28.7±15.2 MB/s, size: 51.3 KB)
+val: Scanning /workspace/datasets/combined_dataset/labels/valid... 521 images, 1 backgrounds, 0 corrupt: 100%|██████████| 521/521 [00:00<00:00, 803.24it/s]
+val: New cache created: /workspace/datasets/combined_dataset/labels/valid.cache
+Plotting labels to runs/detect/helmet_detection/labels.jpg... 
+optimizer: 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+optimizer: SGD(lr=0.01, momentum=0.9) with parameter groups 57 weight(decay=0.0), 64 weight(decay=0.0005), 63 bias(decay=0.0)
+Image sizes 320 train, 320 val
+Using 8 dataloader workers
+Logging results to runs/detect/helmet_detection
+Starting training for 100 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      1/100     0.924G      1.354      1.681      1.255         29        320: 100%|██████████| 697/697 [00:54<00:00, 12.72it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:02<00:00,  6.62it/s]
+                   all        521        846        0.9      0.914      0.944      0.628
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      2/100     0.924G      1.256      1.002      1.216         23        320: 100%|██████████| 697/697 [00:54<00:00, 12.69it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 11.50it/s]
+                   all        521        846      0.896      0.922      0.948      0.666
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      3/100     0.924G       1.26     0.9449      1.237         28        320: 100%|██████████| 697/697 [00:49<00:00, 14.11it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 11.94it/s]
+                   all        521        846      0.897      0.903       0.94      0.623
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      4/100     0.924G       1.26      0.883      1.241         22        320: 100%|██████████| 697/697 [00:47<00:00, 14.59it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.10it/s]
+                   all        521        846      0.892      0.918      0.948      0.645
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      5/100     0.924G       1.21      0.793      1.225         28        320: 100%|██████████| 697/697 [00:46<00:00, 14.89it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.31it/s]
+                   all        521        846      0.891      0.923      0.948      0.641
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      6/100     0.924G      1.173     0.7315      1.209         30        320: 100%|██████████| 697/697 [00:50<00:00, 13.86it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.26it/s]
+                   all        521        846      0.937      0.923       0.97      0.674
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      7/100     0.924G      1.155      0.708      1.198         31        320: 100%|██████████| 697/697 [00:52<00:00, 13.25it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 10.43it/s]
+                   all        521        846      0.954      0.937      0.978      0.694
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      8/100     0.924G      1.124     0.6705      1.179         28        320: 100%|██████████| 697/697 [00:53<00:00, 12.98it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.19it/s]
+                   all        521        846      0.924      0.929      0.967      0.705
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      9/100     0.924G      1.103     0.6533      1.168         18        320: 100%|██████████| 697/697 [00:50<00:00, 13.75it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 11.79it/s]
+                   all        521        846      0.934      0.933      0.965      0.703
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     10/100     0.924G      1.091     0.6358      1.164         25        320: 100%|██████████| 697/697 [00:56<00:00, 12.30it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 11.95it/s]
+                   all        521        846      0.936      0.941      0.973      0.687
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     11/100     0.924G      1.073     0.6195      1.155         27        320: 100%|██████████| 697/697 [00:50<00:00, 13.73it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 11.63it/s]
+                   all        521        846      0.915      0.946      0.968      0.709
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     12/100     0.924G      1.064      0.611      1.156         33        320: 100%|██████████| 697/697 [00:50<00:00, 13.78it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 11.33it/s]
+                   all        521        846      0.925      0.952      0.966      0.721
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     13/100     0.924G      1.053      0.602       1.15         28        320: 100%|██████████| 697/697 [00:44<00:00, 15.72it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 11.57it/s]
+                   all        521        846      0.951      0.941      0.975      0.728
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     14/100     0.924G      1.039     0.5887      1.138         22        320: 100%|██████████| 697/697 [00:54<00:00, 12.73it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.44it/s]
+                   all        521        846      0.941      0.959      0.978      0.717
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     15/100     0.924G      1.034       0.58      1.139         26        320: 100%|██████████| 697/697 [00:54<00:00, 12.81it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.12it/s]
+                   all        521        846      0.954      0.953      0.981      0.724
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     16/100     0.924G      1.019     0.5679      1.131         33        320: 100%|██████████| 697/697 [00:50<00:00, 13.70it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.30it/s]
+                   all        521        846      0.926      0.951      0.977       0.73
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     17/100     0.924G      1.019     0.5669      1.132         24        320: 100%|██████████| 697/697 [00:54<00:00, 12.72it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 11.12it/s]
+                   all        521        846      0.951      0.966      0.979      0.729
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     18/100     0.924G      1.001     0.5549      1.124         27        320: 100%|██████████| 697/697 [00:43<00:00, 16.00it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 11.91it/s]
+                   all        521        846      0.941      0.974      0.982      0.716
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     19/100     0.924G     0.9999     0.5529      1.119         26        320: 100%|██████████| 697/697 [00:45<00:00, 15.43it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.46it/s]
+                   all        521        846      0.931      0.958      0.974      0.716
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     20/100     0.924G     0.9914     0.5462      1.115         28        320: 100%|██████████| 697/697 [00:54<00:00, 12.69it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 11.93it/s]
+                   all        521        846      0.959      0.949      0.981       0.72
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     21/100     0.924G     0.9885     0.5396      1.116         31        320: 100%|██████████| 697/697 [00:53<00:00, 13.02it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.17it/s]
+                   all        521        846      0.951      0.952       0.98      0.729
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     22/100     0.924G     0.9873     0.5409      1.112         18        320: 100%|██████████| 697/697 [00:53<00:00, 13.10it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.54it/s]
+                   all        521        846      0.946       0.96      0.978      0.732
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     23/100     0.924G     0.9809     0.5363      1.105         25        320: 100%|██████████| 697/697 [00:53<00:00, 13.12it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 11.87it/s]
+                   all        521        846      0.941      0.965      0.983      0.727
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     24/100     0.924G     0.9695     0.5304      1.107         36        320: 100%|██████████| 697/697 [00:54<00:00, 12.82it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.22it/s]
+                   all        521        846      0.957       0.95      0.982      0.744
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     25/100     0.924G     0.9665     0.5281      1.104         30        320: 100%|██████████| 697/697 [00:54<00:00, 12.84it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.35it/s]
+                   all        521        846      0.958      0.955      0.983      0.743
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     26/100     0.924G     0.9642     0.5198      1.103         22        320: 100%|██████████| 697/697 [00:53<00:00, 13.08it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.18it/s]
+                   all        521        846      0.946      0.964      0.978      0.743
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     27/100     0.924G     0.9565     0.5176      1.095         22        320: 100%|██████████| 697/697 [00:53<00:00, 13.06it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.24it/s]
+                   all        521        846      0.948      0.965      0.986      0.742
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     28/100     0.924G     0.9447     0.5097      1.095         26        320: 100%|██████████| 697/697 [00:49<00:00, 14.12it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.06it/s]
+                   all        521        846      0.955      0.964      0.985      0.746
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     29/100     0.924G     0.9468     0.5107      1.089         43        320: 100%|██████████| 697/697 [00:53<00:00, 13.00it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.43it/s]
+                   all        521        846      0.954      0.972      0.987      0.739
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     30/100     0.924G      0.945     0.5027      1.093         19        320: 100%|██████████| 697/697 [00:53<00:00, 13.12it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.48it/s]
+                   all        521        846      0.963      0.958      0.984      0.756
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     31/100     0.924G     0.9443      0.506      1.087         32        320: 100%|██████████| 697/697 [00:53<00:00, 12.97it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.23it/s]
+                   all        521        846      0.961      0.957      0.984      0.744
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     32/100     0.924G     0.9353     0.4965       1.08         26        320: 100%|██████████| 697/697 [00:54<00:00, 12.81it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.32it/s]
+                   all        521        846      0.948      0.969      0.984      0.744
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     33/100     0.924G     0.9317     0.4965      1.083         37        320: 100%|██████████| 697/697 [00:55<00:00, 12.57it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.34it/s]
+                   all        521        846      0.958      0.961      0.984      0.748
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     34/100     0.924G     0.9254     0.4888      1.078         21        320: 100%|██████████| 697/697 [00:54<00:00, 12.71it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.09it/s]
+                   all        521        846      0.962      0.955      0.984      0.752
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+     35/100     0.924G     0.9245     0.4902      1.078         24        320: 100%|██████████| 697/697 [00:57<00:00, 12.16it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.15it/s]
+                   all        521        846      0.964      0.961      0.985      0.743
+EarlyStopping: Training stopped early as no improvement observed in last 5 epochs. Best results observed at epoch 30, best model saved as best.pt.
+To update EarlyStopping(patience=5) pass a new patience value, i.e. `patience=300` or use `patience=0` to disable EarlyStopping.
+
+35 epochs completed in 0.525 hours.
+Optimizer stripped from runs/detect/helmet_detection/weights/last.pt, 6.2MB
+Optimizer stripped from runs/detect/helmet_detection/weights/best.pt, 6.2MB
+
+Validating runs/detect/helmet_detection/weights/best.pt...
+Ultralytics 8.3.162 🚀 Python-3.10.12 torch-2.1.0+cu118 CUDA:0 (NVIDIA RTX 4000 Ada Generation, 20147MiB)
+Model summary (fused): 72 layers, 3,006,428 parameters, 0 gradients, 8.1 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:02<00:00,  7.17it/s]
+                   all        521        846      0.963      0.958      0.984      0.756
+              motobike        176        272      0.967      0.982      0.992      0.826
+                    LP        250        255      0.986      0.984      0.993      0.873
+                helmet        184        205      0.959      0.961      0.981      0.747
+             no helmet         94        114      0.938      0.904       0.97      0.576
+Speed: 0.0ms preprocess, 0.2ms inference, 0.0ms loss, 0.7ms postprocess per image
+Results saved to runs/detect/helmet_detection
+
+--- Training Finished ---
+Model and results saved in the 'runs/detect/helmet_detection' directory.
+
+--- Step 2: Exporting Model to TFLite ---
+Loading best model from: runs/detect/helmet_detection/weights/best.pt
+Ultralytics 8.3.162 🚀 Python-3.10.12 torch-2.1.0+cu118 CPU (AMD EPYC 7702 64-Core Processor)
+Model summary (fused): 72 layers, 3,006,428 parameters, 0 gradients, 8.1 GFLOPs
+
+PyTorch: starting from 'runs/detect/helmet_detection/weights/best.pt' with input shape (1, 3, 320, 320) BCHW and output shape(s) (1, 8, 2100) (5.9 MB)
+requirements: Ultralytics requirement ['tensorflow>=2.0.0'] not found, attempting AutoUpdate...
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+Collecting tensorflow>=2.0.0
+  Downloading tensorflow-2.19.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+Collecting absl-py>=1.0.0 (from tensorflow>=2.0.0)
+  Downloading absl_py-2.3.1-py3-none-any.whl.metadata (3.3 kB)
+Collecting astunparse>=1.6.0 (from tensorflow>=2.0.0)
+  Downloading astunparse-1.6.3-py2.py3-none-any.whl.metadata (4.4 kB)
+Collecting flatbuffers>=24.3.25 (from tensorflow>=2.0.0)
+  Downloading flatbuffers-25.2.10-py2.py3-none-any.whl.metadata (875 bytes)
+Collecting gast!=0.5.0,!=0.5.1,!=0.5.2,>=0.2.1 (from tensorflow>=2.0.0)
+  Downloading gast-0.6.0-py3-none-any.whl.metadata (1.3 kB)
+Collecting google-pasta>=0.1.1 (from tensorflow>=2.0.0)
+  Downloading google_pasta-0.2.0-py3-none-any.whl.metadata (814 bytes)
+Collecting libclang>=13.0.0 (from tensorflow>=2.0.0)
+  Downloading libclang-18.1.1-py2.py3-none-manylinux2010_x86_64.whl.metadata (5.2 kB)
+Collecting opt-einsum>=2.3.2 (from tensorflow>=2.0.0)
+  Downloading opt_einsum-3.4.0-py3-none-any.whl.metadata (6.3 kB)
+Requirement already satisfied: packaging in /usr/local/lib/python3.10/dist-packages (from tensorflow>=2.0.0) (23.2)
+Collecting protobuf!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<6.0.0dev,>=3.20.3 (from tensorflow>=2.0.0)
+  Downloading protobuf-5.29.5-cp38-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
+Requirement already satisfied: requests<3,>=2.21.0 in /usr/local/lib/python3.10/dist-packages (from tensorflow>=2.0.0) (2.31.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.10/dist-packages (from tensorflow>=2.0.0) (68.2.2)
+Requirement already satisfied: six>=1.12.0 in /usr/lib/python3/dist-packages (from tensorflow>=2.0.0) (1.16.0)
+Collecting termcolor>=1.1.0 (from tensorflow>=2.0.0)
+  Downloading termcolor-3.1.0-py3-none-any.whl.metadata (6.4 kB)
+Requirement already satisfied: typing-extensions>=3.6.6 in /usr/local/lib/python3.10/dist-packages (from tensorflow>=2.0.0) (4.4.0)
+Collecting wrapt>=1.11.0 (from tensorflow>=2.0.0)
+  Downloading wrapt-1.17.2-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.4 kB)
+Collecting grpcio<2.0,>=1.24.3 (from tensorflow>=2.0.0)
+  Downloading grpcio-1.73.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.8 kB)
+Collecting tensorboard~=2.19.0 (from tensorflow>=2.0.0)
+  Downloading tensorboard-2.19.0-py3-none-any.whl.metadata (1.8 kB)
+Collecting keras>=3.5.0 (from tensorflow>=2.0.0)
+  Downloading keras-3.10.0-py3-none-any.whl.metadata (6.0 kB)
+Requirement already satisfied: numpy<2.2.0,>=1.26.0 in /usr/local/lib/python3.10/dist-packages (from tensorflow>=2.0.0) (1.26.4)
+Collecting h5py>=3.11.0 (from tensorflow>=2.0.0)
+  Downloading h5py-3.14.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.7 kB)
+Collecting ml-dtypes<1.0.0,>=0.5.1 (from tensorflow>=2.0.0)
+  Downloading ml_dtypes-0.5.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (21 kB)
+Collecting tensorflow-io-gcs-filesystem>=0.23.1 (from tensorflow>=2.0.0)
+  Downloading tensorflow_io_gcs_filesystem-0.37.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (14 kB)
+Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2.21.0->tensorflow>=2.0.0) (2.1.1)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2.21.0->tensorflow>=2.0.0) (3.7)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2.21.0->tensorflow>=2.0.0) (1.26.13)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2.21.0->tensorflow>=2.0.0) (2022.12.7)
+Collecting markdown>=2.6.8 (from tensorboard~=2.19.0->tensorflow>=2.0.0)
+  Downloading markdown-3.8.2-py3-none-any.whl.metadata (5.1 kB)
+Collecting tensorboard-data-server<0.8.0,>=0.7.0 (from tensorboard~=2.19.0->tensorflow>=2.0.0)
+  Downloading tensorboard_data_server-0.7.2-py3-none-manylinux_2_31_x86_64.whl.metadata (1.1 kB)
+Collecting werkzeug>=1.0.1 (from tensorboard~=2.19.0->tensorflow>=2.0.0)
+  Downloading werkzeug-3.1.3-py3-none-any.whl.metadata (3.7 kB)
+Requirement already satisfied: wheel<1.0,>=0.23.0 in /usr/local/lib/python3.10/dist-packages (from astunparse>=1.6.0->tensorflow>=2.0.0) (0.41.3)
+Collecting rich (from keras>=3.5.0->tensorflow>=2.0.0)
+  Downloading rich-14.0.0-py3-none-any.whl.metadata (18 kB)
+Collecting namex (from keras>=3.5.0->tensorflow>=2.0.0)
+  Downloading namex-0.1.0-py3-none-any.whl.metadata (322 bytes)
+Collecting optree (from keras>=3.5.0->tensorflow>=2.0.0)
+  Downloading optree-0.16.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (30 kB)
+Requirement already satisfied: MarkupSafe>=2.1.1 in /usr/local/lib/python3.10/dist-packages (from werkzeug>=1.0.1->tensorboard~=2.19.0->tensorflow>=2.0.0) (2.1.2)
+Collecting typing-extensions>=3.6.6 (from tensorflow>=2.0.0)
+  Downloading typing_extensions-4.14.1-py3-none-any.whl.metadata (3.0 kB)
+Collecting markdown-it-py>=2.2.0 (from rich->keras>=3.5.0->tensorflow>=2.0.0)
+  Downloading markdown_it_py-3.0.0-py3-none-any.whl.metadata (6.9 kB)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /usr/local/lib/python3.10/dist-packages (from rich->keras>=3.5.0->tensorflow>=2.0.0) (2.16.1)
+Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich->keras>=3.5.0->tensorflow>=2.0.0)
+  Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+Downloading tensorflow-2.19.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (644.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 644.8/644.8 MB 13.3 MB/s eta 0:00:00
+Downloading grpcio-1.73.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (6.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.0/6.0 MB 16.3 MB/s eta 0:00:00
+Downloading ml_dtypes-0.5.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 16.6 MB/s eta 0:00:00
+Downloading protobuf-5.29.5-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
+Downloading tensorboard-2.19.0-py3-none-any.whl (5.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.5/5.5 MB 17.1 MB/s eta 0:00:00
+Downloading tensorboard_data_server-0.7.2-py3-none-manylinux_2_31_x86_64.whl (6.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 14.0 MB/s eta 0:00:00
+Downloading absl_py-2.3.1-py3-none-any.whl (135 kB)
+Downloading astunparse-1.6.3-py2.py3-none-any.whl (12 kB)
+Downloading flatbuffers-25.2.10-py2.py3-none-any.whl (30 kB)
+Downloading gast-0.6.0-py3-none-any.whl (21 kB)
+Downloading google_pasta-0.2.0-py3-none-any.whl (57 kB)
+Downloading h5py-3.14.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.6/4.6 MB 12.8 MB/s eta 0:00:00
+Downloading keras-3.10.0-py3-none-any.whl (1.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 13.4 MB/s eta 0:00:00
+Downloading libclang-18.1.1-py2.py3-none-manylinux2010_x86_64.whl (24.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.5/24.5 MB 12.1 MB/s eta 0:00:00
+Downloading markdown-3.8.2-py3-none-any.whl (106 kB)
+Downloading opt_einsum-3.4.0-py3-none-any.whl (71 kB)
+Downloading tensorflow_io_gcs_filesystem-0.37.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (5.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.1/5.1 MB 11.5 MB/s eta 0:00:00
+Downloading termcolor-3.1.0-py3-none-any.whl (7.7 kB)
+Downloading werkzeug-3.1.3-py3-none-any.whl (224 kB)
+Downloading wrapt-1.17.2-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (82 kB)
+Downloading namex-0.1.0-py3-none-any.whl (5.9 kB)
+Downloading optree-0.16.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (405 kB)
+Downloading typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+Downloading rich-14.0.0-py3-none-any.whl (243 kB)
+Downloading markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Installing collected packages: namex, libclang, flatbuffers, wrapt, werkzeug, typing-extensions, termcolor, tensorflow-io-gcs-filesystem, tensorboard-data-server, protobuf, opt-einsum, ml-dtypes, mdurl, markdown, h5py, grpcio, google-pasta, gast, astunparse, absl-py, tensorboard, optree, markdown-it-py, rich, keras, tensorflow
+  Attempting uninstall: typing-extensions
+    Found existing installation: typing_extensions 4.4.0
+    Uninstalling typing_extensions-4.4.0:
+      Successfully uninstalled typing_extensions-4.4.0
+
+Successfully installed absl-py-2.3.1 astunparse-1.6.3 flatbuffers-25.2.10 gast-0.6.0 google-pasta-0.2.0 grpcio-1.73.1 h5py-3.14.0 keras-3.10.0 libclang-18.1.1 markdown-3.8.2 markdown-it-py-3.0.0 mdurl-0.1.2 ml-dtypes-0.5.1 namex-0.1.0 opt-einsum-3.4.0 optree-0.16.0 protobuf-5.29.5 rich-14.0.0 tensorboard-2.19.0 tensorboard-data-server-0.7.2 tensorflow-2.19.0 tensorflow-io-gcs-filesystem-0.37.1 termcolor-3.1.0 typing-extensions-4.14.1 werkzeug-3.1.3 wrapt-1.17.2
+
+requirements: AutoUpdate success ✅ 138.3s
+WARNING ⚠️ requirements: Restart runtime or rerun command for updates to take effect
+
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1751886300.852806     554 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1751886300.857589     554 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1751886300.869083     554 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1751886300.869101     554 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1751886300.869105     554 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1751886300.869111     554 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+requirements: Ultralytics requirements ['tf_keras', 'sng4onnx>=1.0.1', 'onnx_graphsurgeon>=0.3.26', 'ai-edge-litert>=1.2.0,<1.4.0', 'onnx>=1.12.0,<1.18.0', 'onnx2tf>=1.26.3', 'onnxslim>=0.1.56', 'onnxruntime-gpu'] not found, attempting AutoUpdate...
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+Looking in indexes: https://pypi.org/simple, https://pypi.ngc.nvidia.com
+Collecting tf_keras
+  Downloading tf_keras-2.19.0-py3-none-any.whl.metadata (1.8 kB)
+Collecting sng4onnx>=1.0.1
+  Downloading sng4onnx-1.0.4-py3-none-any.whl.metadata (4.6 kB)
+Collecting onnx_graphsurgeon>=0.3.26
+  Downloading onnx_graphsurgeon-0.5.8-py2.py3-none-any.whl.metadata (8.2 kB)
+Collecting ai-edge-litert<1.4.0,>=1.2.0
+  Downloading ai_edge_litert-1.3.0-cp310-cp310-manylinux_2_17_x86_64.whl.metadata (1.7 kB)
+Collecting onnx<1.18.0,>=1.12.0
+  Downloading onnx-1.17.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (16 kB)
+Collecting onnx2tf>=1.26.3
+  Downloading onnx2tf-1.28.1-py3-none-any.whl.metadata (151 kB)
+Collecting onnxslim>=0.1.56
+  Downloading onnxslim-0.1.59-py3-none-any.whl.metadata (5.8 kB)
+Collecting onnxruntime-gpu
+  Downloading onnxruntime_gpu-1.22.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+Collecting backports.strenum (from ai-edge-litert<1.4.0,>=1.2.0)
+  Downloading backports_strenum-1.3.1-py3-none-any.whl.metadata (3.7 kB)
+Requirement already satisfied: flatbuffers in /usr/local/lib/python3.10/dist-packages (from ai-edge-litert<1.4.0,>=1.2.0) (25.2.10)
+Requirement already satisfied: numpy>=1.23.2 in /usr/local/lib/python3.10/dist-packages (from ai-edge-litert<1.4.0,>=1.2.0) (1.26.4)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.10/dist-packages (from ai-edge-litert<1.4.0,>=1.2.0) (4.67.1)
+Requirement already satisfied: typing-extensions in /usr/local/lib/python3.10/dist-packages (from ai-edge-litert<1.4.0,>=1.2.0) (4.14.1)
+Requirement already satisfied: protobuf>=3.20.2 in /usr/local/lib/python3.10/dist-packages (from onnx<1.18.0,>=1.12.0) (5.29.5)
+Requirement already satisfied: tensorflow<2.20,>=2.19 in /usr/local/lib/python3.10/dist-packages (from tf_keras) (2.19.0)
+Requirement already satisfied: absl-py>=1.0.0 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (2.3.1)
+Requirement already satisfied: astunparse>=1.6.0 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (1.6.3)
+Requirement already satisfied: gast!=0.5.0,!=0.5.1,!=0.5.2,>=0.2.1 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (0.6.0)
+Requirement already satisfied: google-pasta>=0.1.1 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (0.2.0)
+Requirement already satisfied: libclang>=13.0.0 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (18.1.1)
+Requirement already satisfied: opt-einsum>=2.3.2 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (3.4.0)
+Requirement already satisfied: packaging in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (23.2)
+Requirement already satisfied: requests<3,>=2.21.0 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (2.31.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (68.2.2)
+Requirement already satisfied: six>=1.12.0 in /usr/lib/python3/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (1.16.0)
+Requirement already satisfied: termcolor>=1.1.0 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (3.1.0)
+Requirement already satisfied: wrapt>=1.11.0 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (1.17.2)
+Requirement already satisfied: grpcio<2.0,>=1.24.3 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (1.73.1)
+Requirement already satisfied: tensorboard~=2.19.0 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (2.19.0)
+Requirement already satisfied: keras>=3.5.0 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (3.10.0)
+Requirement already satisfied: h5py>=3.11.0 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (3.14.0)
+Requirement already satisfied: ml-dtypes<1.0.0,>=0.5.1 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (0.5.1)
+Requirement already satisfied: tensorflow-io-gcs-filesystem>=0.23.1 in /usr/local/lib/python3.10/dist-packages (from tensorflow<2.20,>=2.19->tf_keras) (0.37.1)
+Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2.21.0->tensorflow<2.20,>=2.19->tf_keras) (2.1.1)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2.21.0->tensorflow<2.20,>=2.19->tf_keras) (3.7)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2.21.0->tensorflow<2.20,>=2.19->tf_keras) (1.26.13)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests<3,>=2.21.0->tensorflow<2.20,>=2.19->tf_keras) (2022.12.7)
+Requirement already satisfied: markdown>=2.6.8 in /usr/local/lib/python3.10/dist-packages (from tensorboard~=2.19.0->tensorflow<2.20,>=2.19->tf_keras) (3.8.2)
+Requirement already satisfied: tensorboard-data-server<0.8.0,>=0.7.0 in /usr/local/lib/python3.10/dist-packages (from tensorboard~=2.19.0->tensorflow<2.20,>=2.19->tf_keras) (0.7.2)
+Requirement already satisfied: werkzeug>=1.0.1 in /usr/local/lib/python3.10/dist-packages (from tensorboard~=2.19.0->tensorflow<2.20,>=2.19->tf_keras) (3.1.3)
+Collecting sympy>=1.13.3 (from onnxslim>=0.1.56)
+  Downloading sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+Collecting coloredlogs (from onnxruntime-gpu)
+  Downloading coloredlogs-15.0.1-py2.py3-none-any.whl.metadata (12 kB)
+Requirement already satisfied: wheel<1.0,>=0.23.0 in /usr/local/lib/python3.10/dist-packages (from astunparse>=1.6.0->tensorflow<2.20,>=2.19->tf_keras) (0.41.3)
+Requirement already satisfied: rich in /usr/local/lib/python3.10/dist-packages (from keras>=3.5.0->tensorflow<2.20,>=2.19->tf_keras) (14.0.0)
+Requirement already satisfied: namex in /usr/local/lib/python3.10/dist-packages (from keras>=3.5.0->tensorflow<2.20,>=2.19->tf_keras) (0.1.0)
+Requirement already satisfied: optree in /usr/local/lib/python3.10/dist-packages (from keras>=3.5.0->tensorflow<2.20,>=2.19->tf_keras) (0.16.0)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.10/dist-packages (from sympy>=1.13.3->onnxslim>=0.1.56) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.1.1 in /usr/local/lib/python3.10/dist-packages (from werkzeug>=1.0.1->tensorboard~=2.19.0->tensorflow<2.20,>=2.19->tf_keras) (2.1.2)
+Collecting humanfriendly>=9.1 (from coloredlogs->onnxruntime-gpu)
+  Downloading humanfriendly-10.0-py2.py3-none-any.whl.metadata (9.2 kB)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /usr/local/lib/python3.10/dist-packages (from rich->keras>=3.5.0->tensorflow<2.20,>=2.19->tf_keras) (3.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /usr/local/lib/python3.10/dist-packages (from rich->keras>=3.5.0->tensorflow<2.20,>=2.19->tf_keras) (2.16.1)
+Requirement already satisfied: mdurl~=0.1 in /usr/local/lib/python3.10/dist-packages (from markdown-it-py>=2.2.0->rich->keras>=3.5.0->tensorflow<2.20,>=2.19->tf_keras) (0.1.2)
+Downloading ai_edge_litert-1.3.0-cp310-cp310-manylinux_2_17_x86_64.whl (11.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.2/11.2 MB 8.8 MB/s eta 0:00:00
+Downloading onnx-1.17.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.0/16.0 MB 46.1 MB/s eta 0:00:00
+Downloading tf_keras-2.19.0-py3-none-any.whl (1.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 232.6 MB/s eta 0:00:00
+Downloading sng4onnx-1.0.4-py3-none-any.whl (5.9 kB)
+Downloading onnx_graphsurgeon-0.5.8-py2.py3-none-any.whl (57 kB)
+Downloading onnx2tf-1.28.1-py3-none-any.whl (467 kB)
+Downloading onnxslim-0.1.59-py3-none-any.whl (154 kB)
+Downloading onnxruntime_gpu-1.22.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (283.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 283.2/283.2 MB 70.6 MB/s eta 0:00:00
+Downloading sympy-1.14.0-py3-none-any.whl (6.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.3/6.3 MB 72.6 MB/s eta 0:00:00
+Downloading backports_strenum-1.3.1-py3-none-any.whl (8.3 kB)
+Downloading coloredlogs-15.0.1-py2.py3-none-any.whl (46 kB)
+Downloading humanfriendly-10.0-py2.py3-none-any.whl (86 kB)
+Installing collected packages: sympy, sng4onnx, onnx2tf, onnx, humanfriendly, backports.strenum, onnxslim, onnx_graphsurgeon, coloredlogs, ai-edge-litert, onnxruntime-gpu, tf_keras
+  Attempting uninstall: sympy
+    Found existing installation: sympy 1.12
+    Uninstalling sympy-1.12:
+      Successfully uninstalled sympy-1.12
+
+Successfully installed ai-edge-litert-1.3.0 backports.strenum-1.3.1 coloredlogs-15.0.1 humanfriendly-10.0 onnx-1.17.0 onnx2tf-1.28.1 onnx_graphsurgeon-0.5.8 onnxruntime-gpu-1.22.0 onnxslim-0.1.59 sng4onnx-1.0.4 sympy-1.14.0 tf_keras-2.19.0
+
+requirements: AutoUpdate success ✅ 40.6s
+WARNING ⚠️ requirements: Restart runtime or rerun command for updates to take effect
+
+
+TensorFlow SavedModel: starting export with tensorflow 2.19.0...
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/calibration_image_sample_data_20x128x128x3_float32.npy.zip to 'calibration_image_sample_data_20x128x128x3_float32.npy.zip'...
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1.11M/1.11M [00:00<00:00, 6.28MB/s]
+Unzipping calibration_image_sample_data_20x128x128x3_float32.npy.zip to /workspace/calibration_image_sample_data_20x128x128x3_float32.npy...: 100%|██████████| 1/1 [00:00<00:00, 17.34f
+
+ONNX: starting export with onnx 1.17.0 opset 17...
+ONNX: slimming with onnxslim 0.1.59...
+ONNX: export success ✅ 1.4s, saved as 'runs/detect/helmet_detection/weights/best.onnx' (11.6 MB)
+TensorFlow SavedModel: starting TFLite export with onnx2tf 1.28.1...
+E0000 00:00:1751886346.064345     554 cuda_executor.cc:1228] INTERNAL: CUDA Runtime error: Failed call to cudaGetRuntimeVersion: Error loading CUDA libraries. GPU will not be used.: Error loading CUDA libraries. GPU will not be used.
+W0000 00:00:1751886346.070052     554 gpu_device.cc:2341] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+Saved artifact at 'runs/detect/helmet_detection/weights/best_saved_model'. The following endpoints are available:
+
+* Endpoint 'serving_default'
+  inputs_0 (POSITIONAL_ONLY): TensorSpec(shape=(1, 320, 320, 3), dtype=tf.float32, name='images')
+Output Type:
+  TensorSpec(shape=(1, 8, 2100), dtype=tf.float32, name=None)
+Captures:
+  137379793290160: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  137379793289808: TensorSpec(shape=(3, 3, 3, 16), dtype=tf.float32, name=None)
+  137379793293152: TensorSpec(shape=(16,), dtype=tf.float32, name=None)
+  137379397394752: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  137379397401088: TensorSpec(shape=(3, 3, 16, 32), dtype=tf.float32, name=None)
+  137379397127152: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  137379396827472: TensorSpec(shape=(1, 1, 32, 32), dtype=tf.float32, name=None)
+  137379396826064: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  137379491615264: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379491620016: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379491618256: TensorSpec(shape=(3, 3, 16, 16), dtype=tf.float32, name=None)
+  137379491618432: TensorSpec(shape=(16,), dtype=tf.float32, name=None)
+  137379491427808: TensorSpec(shape=(3, 3, 16, 16), dtype=tf.float32, name=None)
+  137379491416016: TensorSpec(shape=(16,), dtype=tf.float32, name=None)
+  137379491618960: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379491619136: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379490891552: TensorSpec(shape=(1, 1, 48, 32), dtype=tf.float32, name=None)
+  137379490891024: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  137379491801120: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  137379491806048: TensorSpec(shape=(3, 3, 32, 64), dtype=tf.float32, name=None)
+  137379490849088: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379599292848: TensorSpec(shape=(1, 1, 64, 64), dtype=tf.float32, name=None)
+  137379599765520: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379599723056: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379599724640: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379599718480: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  137379599721472: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  137379599809728: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  137379599795296: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  137379574776928: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  137379574780272: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  137379575526352: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  137379575514032: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  137379599720768: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379599722000: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379575574976: TensorSpec(shape=(1, 1, 128, 64), dtype=tf.float32, name=None)
+  137379575565120: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379575340672: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  137379575347008: TensorSpec(shape=(3, 3, 64, 128), dtype=tf.float32, name=None)
+  137379822192944: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137379822253888: TensorSpec(shape=(1, 1, 128, 128), dtype=tf.float32, name=None)
+  137379822255296: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137379822325776: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379822327008: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379822809888: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379822799328: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379822606240: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379822208624: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379822532592: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379587185072: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379586530064: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379586576752: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379822323840: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379822325072: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379586273024: TensorSpec(shape=(1, 1, 256, 128), dtype=tf.float32, name=None)
+  137379586756624: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137380893318608: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  137379586356176: TensorSpec(shape=(3, 3, 128, 256), dtype=tf.float32, name=None)
+  137380893323008: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  137380893743888: TensorSpec(shape=(1, 1, 256, 256), dtype=tf.float32, name=None)
+  137380892838368: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  137380893095744: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137380893097328: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137380893084304: TensorSpec(shape=(3, 3, 128, 128), dtype=tf.float32, name=None)
+  137380893085712: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137380893614224: TensorSpec(shape=(3, 3, 128, 128), dtype=tf.float32, name=None)
+  137380893621968: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137380893093456: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137380893094688: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137380893159168: TensorSpec(shape=(1, 1, 384, 256), dtype=tf.float32, name=None)
+  137380893162688: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  137379244849312: TensorSpec(shape=(1, 1, 256, 128), dtype=tf.float32, name=None)
+  137379244848784: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137379244507200: TensorSpec(shape=(1, 1, 512, 256), dtype=tf.float32, name=None)
+  137379244458224: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  137379082959008: TensorSpec(shape=(1, 1, 384, 128), dtype=tf.float32, name=None)
+  137379082959536: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137379083095376: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379083096608: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379083725184: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379083723248: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379083818208: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379083666352: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379083093440: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379083094672: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379083299376: TensorSpec(shape=(1, 1, 192, 128), dtype=tf.float32, name=None)
+  137379083297440: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137379083303424: TensorSpec(shape=(1, 1, 192, 64), dtype=tf.float32, name=None)
+  137379284767264: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379284899568: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379284900800: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379284448560: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  137379284893760: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  137379285052128: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  137379285044560: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  137379284897632: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379284898864: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379284382672: TensorSpec(shape=(1, 1, 96, 64), dtype=tf.float32, name=None)
+  137379284374928: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379284394128: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  137379284400464: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379972877120: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379973171328: TensorSpec(shape=(1, 1, 192, 128), dtype=tf.float32, name=None)
+  137379973105792: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137379766690992: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379766691696: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379766222192: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379766220256: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379602082352: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379602074784: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379766689936: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379766690112: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379602215712: TensorSpec(shape=(1, 1, 192, 128), dtype=tf.float32, name=None)
+  137379602207968: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137379602522080: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  137379602528416: TensorSpec(shape=(3, 3, 128, 128), dtype=tf.float32, name=None)
+  137379602467472: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137379989030864: TensorSpec(shape=(1, 1, 384, 256), dtype=tf.float32, name=None)
+  137379989424080: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  137379367363584: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379367364288: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379367286064: TensorSpec(shape=(3, 3, 128, 128), dtype=tf.float32, name=None)
+  137379367284656: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137379366877520: TensorSpec(shape=(3, 3, 128, 128), dtype=tf.float32, name=None)
+  137379366863088: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  137379367362528: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379367362704: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  137379367188464: TensorSpec(shape=(1, 1, 384, 256), dtype=tf.float32, name=None)
+  137379367181424: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  137379283572640: TensorSpec(shape=(3, 3, 256, 64), dtype=tf.float32, name=None)
+  137379284041248: TensorSpec(shape=(3, 3, 256, 64), dtype=tf.float32, name=None)
+  137379602468352: TensorSpec(shape=(3, 3, 128, 64), dtype=tf.float32, name=None)
+  137379602467648: TensorSpec(shape=(3, 3, 128, 64), dtype=tf.float32, name=None)
+  137379972878000: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379972877296: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379283576336: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379284033680: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379602479088: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379602472752: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379972888736: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379972882400: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379283618624: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379283886400: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379989032272: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379989449792: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379973172736: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379972672752: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  137379283626192: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379283891328: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379989040720: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379989032448: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379973181184: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379973172912: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379272461824: TensorSpec(shape=(1, 1, 64, 4), dtype=tf.float32, name=None)
+  137379272423760: TensorSpec(shape=(1, 1, 64, 64), dtype=tf.float32, name=None)
+  137379366999264: TensorSpec(shape=(1, 1, 64, 4), dtype=tf.float32, name=None)
+  137379366640576: TensorSpec(shape=(1, 1, 64, 64), dtype=tf.float32, name=None)
+  137379766490512: TensorSpec(shape=(1, 1, 64, 4), dtype=tf.float32, name=None)
+  137379766763040: TensorSpec(shape=(1, 1, 64, 64), dtype=tf.float32, name=None)
+  137379272423232: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379272469392: TensorSpec(shape=(4,), dtype=tf.float32, name=None)
+  137379366995568: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379367006832: TensorSpec(shape=(4,), dtype=tf.float32, name=None)
+  137379766486816: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  137379766498080: TensorSpec(shape=(4,), dtype=tf.float32, name=None)
+  137379272381488: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  137379272378496: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  137379272507632: TensorSpec(shape=(1, 1, 16, 1), dtype=tf.float32, name=None)
+  137379272876176: TensorSpec(shape=(1, 4, 2100), dtype=tf.float32, name=None)
+  137379272054336: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  137379272056448: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  137379272048880: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  137379272048704: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  137380168301408: TensorSpec(shape=(1, 2, 2100), dtype=tf.float32, name=None)
+  137379272053456: TensorSpec(shape=(1, 2, 2100), dtype=tf.float32, name=None)
+  137379272804656: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  137379272806944: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+E0000 00:00:1751886352.350639     554 cuda_executor.cc:1228] INTERNAL: CUDA Runtime error: Failed call to cudaGetRuntimeVersion: Error loading CUDA libraries. GPU will not be used.: Error loading CUDA libraries. GPU will not be used.
+I0000 00:00:1751886352.351542     554 devices.cc:67] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 1
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1751886352.351802     554 single_machine.cc:374] Starting new session
+E0000 00:00:1751886352.352289     554 cuda_executor.cc:1228] INTERNAL: CUDA Runtime error: Failed call to cudaGetRuntimeVersion: Error loading CUDA libraries. GPU will not be used.: Error loading CUDA libraries. GPU will not be used.
+W0000 00:00:1751886352.353101     554 gpu_device.cc:2341] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+W0000 00:00:1751886353.206862     554 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1751886353.206902     554 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+E0000 00:00:1751886354.215176     554 cuda_executor.cc:1228] INTERNAL: CUDA Runtime error: Failed call to cudaGetRuntimeVersion: Error loading CUDA libraries. GPU will not be used.: Error loading CUDA libraries. GPU will not be used.
+I0000 00:00:1751886354.215818     554 devices.cc:67] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 1
+I0000 00:00:1751886354.215973     554 single_machine.cc:374] Starting new session
+E0000 00:00:1751886354.216581     554 cuda_executor.cc:1228] INTERNAL: CUDA Runtime error: Failed call to cudaGetRuntimeVersion: Error loading CUDA libraries. GPU will not be used.: Error loading CUDA libraries. GPU will not be used.
+W0000 00:00:1751886354.217105     554 gpu_device.cc:2341] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+W0000 00:00:1751886354.994278     554 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1751886354.994316     554 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+TensorFlow SavedModel: export success ✅ 193.9s, saved as 'runs/detect/helmet_detection/weights/best_saved_model' (29.3 MB)
+
+TensorFlow Lite: starting export with tensorflow 2.19.0...
+TensorFlow Lite: export success ✅ 0.0s, saved as 'runs/detect/helmet_detection/weights/best_saved_model/best_float32.tflite' (11.6 MB)
+
+Export complete (194.1s)
+Results saved to /workspace/runs/detect/helmet_detection/weights
+Predict:         yolo predict task=detect model=runs/detect/helmet_detection/weights/best_saved_model/best_float32.tflite imgsz=320  
+Validate:        yolo val task=detect model=runs/detect/helmet_detection/weights/best_saved_model/best_float32.tflite imgsz=320 data=./datasets/combined_dataset/data.yaml  
+Visualize:       https://netron.app
+
+--- Export Complete ---
+TFLite model saved successfully at: runs/detect/helmet_detection/weights/best.tflite
+You can now download this .tflite file and transfer it to your Raspberry Pi.
+root@6f997361882f:/workspace# 

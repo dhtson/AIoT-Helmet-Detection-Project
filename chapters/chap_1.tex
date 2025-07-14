@@ -1,0 +1,18 @@
+\chapter{Introduction}
+\section{Project Motivation and Problem Statement}
+Motorcycle accidents are a major contributor to traffic fatalities worldwide, particularly in regions with a high volume of two-wheeler traffic. A significant factor in the severity of these accidents is the non-usage of safety helmets. Manual monitoring of helmet compliance by law enforcement is labor-intensive and not scalable. Therefore, an automated system that can detect helmet law violations can serve as a crucial tool for promoting road safety and aiding enforcement efforts.
+
+The primary problem is to develop a system that is not only accurate but also cost-effective and capable of running in real-time on accessible hardware. High-end GPU-based systems are often too expensive for widespread deployment. This project aims to bridge that gap by leveraging a lightweight deep learning model on a Raspberry Pi.
+
+\section{Project Objectives}
+The main objectives of this project are as follows:
+\begin{itemize}
+    \item To collect and prepare a suitable dataset for training a multi-class object detector capable of identifying motorbikes, helmets, and license plates.
+    \item To train a YOLOv8n object detection model on the prepared dataset.
+    \item To optimize the trained model for deployment on an edge device by converting it to the TensorFlow Lite (TFLite) format.
+    \item To deploy the optimized model on a Raspberry Pi 3B+ and develop an inference script to perform detection on images.
+    \item To evaluate the performance of the system in terms of both detection accuracy and inference speed on the target hardware.
+\end{itemize}
+
+\section{Scope of the Project}
+The scope of this project is focused on detection from static images. While the system is designed with real-time performance in mind, the implementation will be demonstrated on single image files. The project covers the complete pipeline from data collection, model training, optimization, and deployment, culminating in a functional proof-of-concept on the Raspberry Pi. It does not extend to real-time video stream processing or integration with a larger traffic management infrastructure.
