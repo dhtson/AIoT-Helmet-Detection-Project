@@ -1,0 +1,24 @@
+description: Ultralytics best model trained on ./datasets/combined_dataset/data.yaml
+author: Ultralytics
+date: '2025-07-07T11:02:42.235650'
+version: 8.3.162
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: detect
+batch: 1
+imgsz:
+- 320
+- 320
+names:
+  0: motobike
+  1: LP
+  2: helmet
+  3: no helmet
+args:
+  batch: 1
+  fraction: 1.0
+  half: false
+  int8: false
+  nms: false
+channels: 3
